@@ -1,0 +1,198 @@
+type: collection.insomnia.rest/5.0
+name: Scratch Pad
+meta:
+  id: wrk_scratchpad
+  created: 1753957780799
+  modified: 1753957780799
+  description: ""
+collection:
+  - name: 1. Autenticação
+    meta:
+      id: fld_3c5ee9f673f84ef48cddb60760d426e6
+      created: 1722812100000
+      modified: 1754332488321
+      sortKey: -1000
+      description: ""
+    children:
+      - url: "{{ baseUrl }}/auth/login"
+        name: Realizar Login
+        meta:
+          id: req_db7d50198b434b33a853ca116feb306d
+          created: 1722798000000
+          modified: 1754332155613
+          isPrivate: false
+          description: >-
+            Use este endpoint para obter tokens de acesso.
+
+
+            **Credenciais Iniciais:**
+
+            - **Diretor:** `diretor` / `password`
+
+            - **Inspetor (após ser criado):** `carlos.inspetor` /
+            `senhaForte123`
+
+            - **Professor (após ser criado):** `mariana.prof` /
+            `outraSenhaSegura456`
+          sortKey: -100
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"login": "diretor",
+            	"senha": "password"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: 3. Inspetor
+    meta:
+      id: fld_991837109919409189dc127db3a20cce
+      created: 1722812100000
+      modified: 1754332492236
+      sortKey: -800
+      description: ""
+    children:
+      - url: "{{ _.baseUrl }}/api/inspetor/professores"
+        name: Cadastrar Professor
+        meta:
+          id: req_1d3b90518e5642c6bf49f4d0fc7f6888
+          created: 1722805200000
+          modified: 1722812100000
+          isPrivate: false
+          description: ""
+          sortKey: -20
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"nome": "Mariana Lima",
+            	"login": "mariana.prof",
+            	"senha": "outraSenhaSegura456"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: COLE_O_TOKEN_DO_INSPETOR_AQUI
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.baseUrl }}/api/inspetor/professores/1"
+        name: Desativar Professor
+        meta:
+          id: req_eb63e2e9c4104d91bb41643bd1ae03ae
+          created: 1722805200000
+          modified: 1722812100000
+          isPrivate: false
+          description: ""
+          sortKey: -15
+        method: DELETE
+        authentication:
+          type: bearer
+          token: COLE_O_TOKEN_DO_INSPETOR_AQUI
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: 2. Diretor
+    meta:
+      id: fld_fe521e60cac84649ad392906e0ecae57
+      created: 1722812100000
+      modified: 1754332489412
+      sortKey: -900
+      description: ""
+    children:
+      - url: "{{ baseUrl }}/api/diretor/inspetores"
+        name: Cadastrar Inspetor
+        meta:
+          id: req_05da8b222a5e476bba061f227e6a3f48
+          created: 1722801600000
+          modified: 1754332317315
+          isPrivate: false
+          description: ""
+          sortKey: -50
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"nome": "Pedro Silva",
+            	"login": "pedro.inspetor",
+            	"senha": "senhaForte123"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: "{% response 'body', 'req_db7d50198b434b33a853ca116feb306d',
+            'b64::JC50b2tlbg==::46b', 'when-expired', 60 %}"
+          disabled: false
+          prefix: ""
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.baseUrl }}/api/diretor/inspetores/2"
+        name: Desativar Inspetor
+        meta:
+          id: req_d13a7cfbc0f341fdaf8879b398370a23
+          created: 1722801600000
+          modified: 1754332340193
+          isPrivate: false
+          description: ""
+          sortKey: -25
+        method: DELETE
+        authentication:
+          type: bearer
+          token: "{% response 'body', 'req_db7d50198b434b33a853ca116feb306d',
+            'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+          disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_99d30891da4bdcebc63947a8fc17f076de878684
+    created: 1753957806164
+    modified: 1753957806164
+environments:
+  name: Base Environment
+  meta:
+    id: env_99d30891da4bdcebc63947a8fc17f076de878684
+    created: 1753957806011
+    modified: 1754330787925
+    isPrivate: false
+  data:
+    baseUrl: http://localhost:8080
