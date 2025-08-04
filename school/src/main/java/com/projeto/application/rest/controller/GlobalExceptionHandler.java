@@ -14,22 +14,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-package com.projeto.application.rest.controller;
-
-import com.projeto.application.dto.ApiErrorDTO;
-import com.projeto.application.exception.BusinessException;
-import com.projeto.application.exception.ResourceNotFoundException;
-import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
-
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
-
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
