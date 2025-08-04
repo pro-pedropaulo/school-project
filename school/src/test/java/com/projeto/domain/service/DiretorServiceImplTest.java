@@ -10,6 +10,7 @@ import com.projeto.domain.port.out.UsuarioPersistencePort;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -18,8 +19,13 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Optional;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.lenient;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class DiretorServiceImplTest {
@@ -43,7 +49,7 @@ class DiretorServiceImplTest {
             lenient().when(passwordEncoder.encode(anyString())).thenReturn("encodedPassword");
         }
 
-        @org.junit.jupiter.api.Test
+        @Test
         void deveCadastrarInspetorComDadosValidos() {
             when(usuarioPersistencePort.buscarPorLogin("login")).thenReturn(Optional.empty());
             when(inspetorPersistencePort.salvar(any(Inspetor.class))).thenAnswer(invocation -> {
@@ -62,7 +68,7 @@ class DiretorServiceImplTest {
             assertThat(inspetor.getUsuario().isAtivo()).isTrue();
         }
 
-        @org.junit.jupiter.api.Test
+        @Test
         void deveLancarExcecaoQuandoLoginJaExiste() {
             when(usuarioPersistencePort.buscarPorLogin("login")).thenReturn(Optional.of(new Usuario()));
 
@@ -76,7 +82,7 @@ class DiretorServiceImplTest {
     @DisplayName("desativarInspetor")
     class DesativarInspetor {
 
-        @org.junit.jupiter.api.Test
+        @Test
         void deveDesativarInspetorComIdValido() {
             Usuario usuario = new Usuario();
             usuario.setAtivo(true);
@@ -93,7 +99,7 @@ class DiretorServiceImplTest {
             verify(usuarioPersistencePort).salvar(usuario);
         }
 
-        @org.junit.jupiter.api.Test
+        @Test
         void deveLancarExcecaoQuandoInspetorNaoExiste() {
             when(inspetorPersistencePort.buscarPorId(99L)).thenReturn(Optional.empty());
 
