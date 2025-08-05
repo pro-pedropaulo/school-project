@@ -1,25 +1,25 @@
 type: collection.insomnia.rest/5.0
-name: Scratch Pad
+name: API School
 meta:
-  id: wrk_scratchpad
-  created: 1753957780799
-  modified: 1753957780799
+  id: wrk_38d9f7a727f443578323784721cdc71c
+  created: 1754395342972
+  modified: 1754395342972
   description: ""
 collection:
   - name: 1. Autenticação
     meta:
-      id: fld_3c5ee9f673f84ef48cddb60760d426e6
+      id: fld_418e9973efc74871991d7f0f8896fdfc
       created: 1722812100000
-      modified: 1754332488321
+      modified: 1722812100000
       sortKey: -1000
       description: ""
     children:
-      - url: "{{ baseUrl }}/auth/login"
+      - url: "{{ _.baseUrl }}/auth/login"
         name: Realizar Login
         meta:
-          id: req_db7d50198b434b33a853ca116feb306d
+          id: req_8e1659017c57403ab158005996565a00
           created: 1722798000000
-          modified: 1754332155613
+          modified: 1754396332159
           isPrivate: false
           description: >-
             Use este endpoint para obter tokens de acesso.
@@ -40,8 +40,8 @@ collection:
           mimeType: application/json
           text: |-
             {
-            	"login": "diretor",
-            	"senha": "password"
+            	"login": "renata.prof2",
+            	"senha": "outraSenhaSegura456"
             }
         headers:
           - name: Content-Type
@@ -56,18 +56,18 @@ collection:
           rebuildPath: true
   - name: 3. Inspetor
     meta:
-      id: fld_991837109919409189dc127db3a20cce
+      id: fld_975b034b4203434c8b0d596a9e15d156
       created: 1722812100000
-      modified: 1754332492236
+      modified: 1722812100000
       sortKey: -800
       description: ""
     children:
       - url: "{{ _.baseUrl }}/api/inspetor/professores"
         name: Cadastrar Professor
         meta:
-          id: req_1d3b90518e5642c6bf49f4d0fc7f6888
+          id: req_9c7e545ca2b9416a9eaf9e134f012b85
           created: 1722805200000
-          modified: 1722812100000
+          modified: 1754396323846
           isPrivate: false
           description: ""
           sortKey: -20
@@ -76,8 +76,8 @@ collection:
           mimeType: application/json
           text: |-
             {
-            	"nome": "Mariana Lima",
-            	"login": "mariana.prof",
+            	"nome": "renata Lima2",
+            	"login": "renata.prof2",
             	"senha": "outraSenhaSegura456"
             }
         headers:
@@ -85,7 +85,7 @@ collection:
             value: application/json
         authentication:
           type: bearer
-          token: COLE_O_TOKEN_DO_INSPETOR_AQUI
+          token: eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUEkgU2Nob29sIiwic3ViIjoidGVzdGU0IiwiaWF0IjoxNzU0Mzk2MTU1LCJleHAiOjE3NTQ0MDMzNTV9.8HocTmtx8mX6Kd3CpsCexljiGkh268G4KxkVld5Jgy8
         settings:
           renderRequestBody: true
           encodeUrl: true
@@ -97,13 +97,91 @@ collection:
       - url: "{{ _.baseUrl }}/api/inspetor/professores/1"
         name: Desativar Professor
         meta:
-          id: req_eb63e2e9c4104d91bb41643bd1ae03ae
+          id: req_bc9c90b2209e47b193d7ca8d3779319d
           created: 1722805200000
-          modified: 1722812100000
+          modified: 1754396225659
           isPrivate: false
           description: ""
           sortKey: -15
         method: DELETE
+        authentication:
+          type: bearer
+          token: eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUEkgU2Nob29sIiwic3ViIjoidGVzdGU0IiwiaWF0IjoxNzU0Mzk2MTU1LCJleHAiOjE3NTQ0MDMzNTV9.8HocTmtx8mX6Kd3CpsCexljiGkh268G4KxkVld5Jgy8
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.baseUrl }}/api/inspetor/presenca"
+        name: Registrar Presença Própria
+        meta:
+          id: req_406483ecbdc640a5b710a122e2f63d2f
+          created: 1722814200000
+          modified: 1754396211252
+          isPrivate: false
+          description: ""
+          sortKey: -17.5
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"data": "2025-08-05"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUEkgU2Nob29sIiwic3ViIjoidGVzdGU0IiwiaWF0IjoxNzU0Mzk2MTU1LCJleHAiOjE3NTQ0MDMzNTV9.8HocTmtx8mX6Kd3CpsCexljiGkh268G4KxkVld5Jgy8
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.baseUrl }}/api/inspetor/presencas"
+        name: Ver Histórico Próprio
+        meta:
+          id: req_c93182cde8e6435f873f7aac45739491
+          created: 1722814200000
+          modified: 1754396219136
+          isPrivate: false
+          description: ""
+          sortKey: -16
+        method: GET
+        authentication:
+          type: bearer
+          token: eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUEkgU2Nob29sIiwic3ViIjoidGVzdGU0IiwiaWF0IjoxNzU0Mzk2MTU1LCJleHAiOjE3NTQ0MDMzNTV9.8HocTmtx8mX6Kd3CpsCexljiGkh268G4KxkVld5Jgy8
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.baseUrl }}/api/inspetor/presencas/professores"
+        name: Ver Presença Professores
+        meta:
+          id: req_e5494eb74211491abbb95812490ef8c9
+          created: 1722814200000
+          modified: 1754396239355
+          isPrivate: false
+          description: ""
+          sortKey: -13
+        method: GET
+        parameters:
+          - id: pair_3ad98e6950804419920eccf6ab43ae80
+            name: data
+            value: 2025-05-05
+            description: ""
+            disabled: false
         authentication:
           type: bearer
           token: COLE_O_TOKEN_DO_INSPETOR_AQUI
@@ -117,18 +195,18 @@ collection:
           rebuildPath: true
   - name: 2. Diretor
     meta:
-      id: fld_fe521e60cac84649ad392906e0ecae57
+      id: fld_9afcc31a86fd4af0b3c275adfa31d7c3
       created: 1722812100000
-      modified: 1754332489412
+      modified: 1722812100000
       sortKey: -900
       description: ""
     children:
-      - url: "{{ baseUrl }}/api/diretor/inspetores"
+      - url: "{{ _.baseUrl }}/api/diretor/inspetores"
         name: Cadastrar Inspetor
         meta:
-          id: req_05da8b222a5e476bba061f227e6a3f48
+          id: req_48c0747690b345cabad21581f098d612
           created: 1722801600000
-          modified: 1754332317315
+          modified: 1754396145634
           isPrivate: false
           description: ""
           sortKey: -50
@@ -137,19 +215,18 @@ collection:
           mimeType: application/json
           text: |-
             {
-            	"nome": "Pedro Silva",
-            	"login": "pedro.inspetor",
-            	"senha": "senhaForte123"
+            	"nome": "teste4",
+            	"login": "teste4",
+            	"senha": "teste4"
             }
         headers:
           - name: Content-Type
             value: application/json
         authentication:
           type: bearer
-          token: "{% response 'body', 'req_db7d50198b434b33a853ca116feb306d',
-            'b64::JC50b2tlbg==::46b', 'when-expired', 60 %}"
+          token: "{% response 'body', 'req_8e1659017c57403ab158005996565a00',
+            'b64::JC50b2tlbg==::46b', 'never', 60 %}"
           disabled: false
-          prefix: ""
         settings:
           renderRequestBody: true
           encodeUrl: true
@@ -158,21 +235,143 @@ collection:
             send: true
             store: true
           rebuildPath: true
-      - url: "{{ _.baseUrl }}/api/diretor/inspetores/2"
+      - url: "{{ _.baseUrl }}/api/diretor/inspetores/3"
         name: Desativar Inspetor
         meta:
-          id: req_d13a7cfbc0f341fdaf8879b398370a23
+          id: req_48e27921501841ae8df0eba7dc90f8e9
           created: 1722801600000
-          modified: 1754332340193
+          modified: 1754395848051
           isPrivate: false
           description: ""
           sortKey: -25
         method: DELETE
         authentication:
           type: bearer
-          token: "{% response 'body', 'req_db7d50198b434b33a853ca116feb306d',
+          token: "{% response 'body', 'req_8e1659017c57403ab158005996565a00',
             'b64::JC50b2tlbg==::46b', 'never', 60 %}"
           disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.baseUrl }}/api/diretor/presencas/inspetores"
+        name: Ver Presença Inspetores
+        meta:
+          id: req_452e51ad2bef469e9f33f9cef09783e3
+          created: 1722814200000
+          modified: 1754395884852
+          isPrivate: false
+          description: ""
+          sortKey: -12.5
+        method: GET
+        parameters:
+          - id: pair_995a22effd5c435fb619dacd547afc21
+            name: data
+            value: 2025-08-05
+            description: ""
+            disabled: false
+        authentication:
+          type: bearer
+          token: "{% response 'body', 'req_8e1659017c57403ab158005996565a00',
+            'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+          disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.baseUrl }}/api/diretor/presencas/professores"
+        name: Ver Presença Professores
+        meta:
+          id: req_91885d31862e4d2a9f92ea50973d74bd
+          created: 1722814200000
+          modified: 1754395994588
+          isPrivate: false
+          description: ""
+          sortKey: -6.25
+        method: GET
+        parameters:
+          - id: pair_7692755523e74da7a5b66599f98fe28e
+            name: data
+            value: 2025-08-05
+            description: ""
+            disabled: false
+          - id: pair_56b5cddfa1cd4659a4d700746864aa84
+            name: ""
+            value: ""
+            description: ""
+            disabled: false
+        authentication:
+          type: bearer
+          token: "{% response 'body', 'req_8e1659017c57403ab158005996565a00',
+            'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+          disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+  - name: 4. Professor
+    meta:
+      id: fld_093e491e953a42dbaeab77235ecf1e5e
+      created: 1722814200000
+      modified: 1722814200000
+      sortKey: -700
+      description: ""
+    children:
+      - url: "{{ _.baseUrl }}/api/professor/presencas"
+        name: Ver Histórico Próprio
+        meta:
+          id: req_39651246c6aa4c7587a20bf90924350d
+          created: 1722814200000
+          modified: 1754396375107
+          isPrivate: false
+          description: ""
+          sortKey: -5
+        method: GET
+        authentication:
+          type: bearer
+          token: eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUEkgU2Nob29sIiwic3ViIjoicmVuYXRhLnByb2YyIiwiaWF0IjoxNzU0Mzk2MzMzLCJleHAiOjE3NTQ0MDM1MzN9.2mmqAJ1YqJYMnQP0wiglStgOVv2s09Q57rYh420ZOUw
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.baseUrl }}/api/professor/presenca"
+        name: Registrar Presença Própria
+        meta:
+          id: req_a017fb4a375c4faf9d58bd11e2c80edd
+          created: 1722814200000
+          modified: 1754396381100
+          isPrivate: false
+          description: ""
+          sortKey: -10
+        method: POST
+        body:
+          mimeType: application/json
+          text: |-
+            {
+            	"data": "2025-08-05"
+            }
+        headers:
+          - name: Content-Type
+            value: application/json
+        authentication:
+          type: bearer
+          token: eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJBUEkgU2Nob29sIiwic3ViIjoicmVuYXRhLnByb2YyIiwiaWF0IjoxNzU0Mzk2MzMzLCJleHAiOjE3NTQ0MDM1MzN9.2mmqAJ1YqJYMnQP0wiglStgOVv2s09Q57rYh420ZOUw
         settings:
           renderRequestBody: true
           encodeUrl: true
@@ -184,15 +383,16 @@ collection:
 cookieJar:
   name: Default Jar
   meta:
-    id: jar_99d30891da4bdcebc63947a8fc17f076de878684
-    created: 1753957806164
-    modified: 1753957806164
+    id: jar_8bd4f0e663d1abf522caa8ebc80c2474aed22157
+    created: 1754395343009
+    modified: 1754395343009
 environments:
   name: Base Environment
   meta:
-    id: env_99d30891da4bdcebc63947a8fc17f076de878684
-    created: 1753957806011
-    modified: 1754330787925
+    id: env_82481161f31147299830e865ac23354c
+    created: 1722798000000
+    modified: 1722864600000
     isPrivate: false
   data:
     baseUrl: http://localhost:8080
+    today: "{% now 'local', 'YYYY-MM-DD' %}"
