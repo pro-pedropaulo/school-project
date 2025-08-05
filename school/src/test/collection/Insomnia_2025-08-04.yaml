@@ -19,7 +19,7 @@ collection:
         meta:
           id: req_8e1659017c57403ab158005996565a00
           created: 1722798000000
-          modified: 1754396332159
+          modified: 1754397324290
           isPrivate: false
           description: >-
             Use este endpoint para obter tokens de acesso.
@@ -40,8 +40,8 @@ collection:
           mimeType: application/json
           text: |-
             {
-            	"login": "renata.prof2",
-            	"senha": "outraSenhaSegura456"
+            	"login": "diretor",
+            	"senha": "password"
             }
         headers:
           - name: Content-Type
@@ -304,6 +304,35 @@ collection:
             description: ""
             disabled: false
           - id: pair_56b5cddfa1cd4659a4d700746864aa84
+            name: ""
+            value: ""
+            description: ""
+            disabled: false
+        authentication:
+          type: bearer
+          token: "{% response 'body', 'req_8e1659017c57403ab158005996565a00',
+            'b64::JC50b2tlbg==::46b', 'never', 60 %}"
+          disabled: false
+        settings:
+          renderRequestBody: true
+          encodeUrl: true
+          followRedirects: global
+          cookies:
+            send: true
+            store: true
+          rebuildPath: true
+      - url: "{{ _.baseUrl }}/api/diretor/inspetores/ativos"
+        name: Ver Lista Inspetores
+        meta:
+          id: req_5d4845984dcc4a6484db586b630fd77a
+          created: 1754397283131
+          modified: 1754397437213
+          isPrivate: false
+          description: ""
+          sortKey: 93.75
+        method: GET
+        parameters:
+          - id: pair_d5fafe9c0dc042a08bc50fcc490e372f
             name: ""
             value: ""
             description: ""

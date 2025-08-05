@@ -5,6 +5,7 @@ import com.projeto.domain.port.out.InspetorPersistencePort;
 import com.projeto.infrastructure.repository.jpa.InspetorRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -24,5 +25,10 @@ public class InspetorPersistenceAdapter implements InspetorPersistencePort {
     @Override
     public Optional<Inspetor> buscarPorId(Long id) {
         return inspetorRepository.buscarPorId(id);
+    }
+
+    @Override
+    public List<Inspetor> buscarTodosAtivos() {
+        return inspetorRepository.findAllAtivos();
     }
 }

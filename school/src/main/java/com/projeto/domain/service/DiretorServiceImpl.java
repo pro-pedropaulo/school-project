@@ -13,6 +13,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Slf4j
 @Service
 public class DiretorServiceImpl implements DiretorUseCase {
@@ -62,5 +64,10 @@ public class DiretorServiceImpl implements DiretorUseCase {
         usuarioParaDesativar.setAtivo(false);
         usuarioPersistencePort.salvar(usuarioParaDesativar);
         log.info("Inspetor com id {} desativado com sucesso.", id);
+    }
+
+    @Override
+    public List<Inspetor> listarInspetoresAtivos() {
+        return inspetorPersistencePort.buscarTodosAtivos();
     }
 }

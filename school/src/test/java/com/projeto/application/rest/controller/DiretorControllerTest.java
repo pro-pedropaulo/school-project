@@ -131,4 +131,35 @@ class DiretorControllerTest {
             assertThat(response.getBody().get(0)).isEqualTo(presencaDTO);
         }
     }
+
+    @Nested
+    @DisplayName("listarInspetoresAtivos")
+    class ListarInspetoresAtivos {
+
+        @Test
+        void retornaOkComListaDeInspetoresAtivos() {
+            Inspetor inspetor = new Inspetor();
+            InspetorResponseDTO responseDTO = new InspetorResponseDTO(1L, "nome", "login");
+            when(diretorUseCase.listarInspetoresAtivos()).thenReturn(List.of(inspetor));
+            when(inspetorMapper.toResponseDTO(inspetor)).thenReturn(responseDTO);
+
+            ResponseEntity<List<InspetorResponseDTO>> response = diretorController.listarInspetoresAtivos();
+
+            assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+            assertThat(response.getBody()).isNotNull();
+            assertThat(response.getBody().size()).isEqualTo(1);
+            assertThat(response.getBody().get(0)).isEqualTo(responseDTO);
+        }
+
+        @Test
+        void retornaOkComListaVazia() {
+            when(diretorUseCase.listarInspetoresAtivos()).thenReturn(Collections.emptyList());
+
+            ResponseEntity<List<InspetorResponseDTO>> response = diretorController.listarInspetoresAtivos();
+
+            assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
+            assertThat(response.getBody()).isNotNull();
+            assertThat(response.getBody()).isEmpty();
+        }
+    }
 }

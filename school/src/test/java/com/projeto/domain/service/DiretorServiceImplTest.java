@@ -17,6 +17,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -106,6 +108,36 @@ class DiretorServiceImplTest {
             assertThatThrownBy(() -> diretorService.desativarInspetor(99L))
                     .isInstanceOf(ResourceNotFoundException.class)
                     .hasMessageContaining("Inspetor");
+        }
+    }
+
+    @Nested
+    @DisplayName("listarInspetoresAtivos")
+    class ListarInspetoresAtivos {
+
+        @Test
+        void deveRetornarListaDeInspetoresAtivos() {
+            Inspetor inspetor1 = new Inspetor();
+            inspetor1.setId(1L);
+            Inspetor inspetor2 = new Inspetor();
+            inspetor2.setId(2L);
+
+            when(inspetorPersistencePort.buscarTodosAtivos()).thenReturn(List.of(inspetor1, inspetor2));
+
+            List<Inspetor> resultado = diretorService.listarInspetoresAtivos();
+
+            assertThat(resultado).containsExactly(inspetor1, inspetor2);
+            verify(inspetorPersistencePort).buscarTodosAtivos();
+        }
+
+        @Test
+        void deveRetornarListaVaziaQuandoNaoHaInspetoresAtivos() {
+            when(inspetorPersistencePort.buscarTodosAtivos()).thenReturn(Collections.emptyList());
+
+            List<Inspetor> resultado = diretorService.listarInspetoresAtivos();
+
+            assertThat(resultado).isEmpty();
+            verify(inspetorPersistencePort).buscarTodosAtivos();
         }
     }
 }

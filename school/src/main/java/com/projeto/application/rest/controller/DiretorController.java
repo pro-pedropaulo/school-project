@@ -66,4 +66,13 @@ public class DiretorController {
                 .collect(Collectors.toList());
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping("/inspetores/ativos")
+    public ResponseEntity<List<InspetorResponseDTO>> listarInspetoresAtivos() {
+        List<Inspetor> inspetores = diretorUseCase.listarInspetoresAtivos();
+        List<InspetorResponseDTO> response = inspetores.stream()
+                .map(inspetorMapper::toResponseDTO)
+                .collect(Collectors.toList());
+        return ResponseEntity.ok(response);
+    }
 }
